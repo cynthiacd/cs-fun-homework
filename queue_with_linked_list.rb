@@ -33,30 +33,30 @@ class Queue
   end
 end
 
-queue = Queue.new
-
-# testing enqueue
-queue.enqueue(5)
-queue.enqueue(6)
-queue.enqueue(7)
-queue.enqueue(8)
-queue.enqueue(9)
-# p queue
-
-# testing dequeue
-queue.dequeue # should return 5
-queue.dequeue # should return 6
-
-p 'testing size - should be 3: '
-p queue.size # should return 3
-
-#testing front
-p 'testing front - should be 7 '
-p queue.front # should be 7
-
-# testing empty?
-p 'testing empty? should be false'
-p queue.empty? # should be false
-3.times { queue.dequeue }
-p 'testing empty? again - should be true'
-p queue.empty? # should be true
+# queue = Queue.new
+#
+# # testing enqueue
+# queue.enqueue(5)
+# queue.enqueue(6)
+# queue.enqueue(7)
+# queue.enqueue(8)
+# queue.enqueue(9)
+# # p queue
+#
+# # testing dequeue
+# queue.dequeue # should return 5
+# queue.dequeue # should return 6
+#
+# p 'testing size - should be 3: '
+# p queue.size # should return 3
+#
+# #testing front
+# p 'testing front - should be 7 '
+# p queue.front # should be 7
+#
+# # testing empty?
+# p 'testing empty? should be false'
+# p queue.empty? # should be false
+# 3.times { queue.dequeue }
+# p 'testing empty? again - should be true'
+# p queue.empty? # should be true

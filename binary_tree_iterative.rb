@@ -1,4 +1,5 @@
 require_relative 'stack_with_linked_list'
+require_relative 'queue_with_linked_list'
 
 class BinaryTree
 
@@ -61,7 +62,43 @@ class BinaryTree
     return false
   end
 
-  def find_height
+  def height
+    return if !@root
+
+    queue = Queue.new
+    height = 0
+    node_count = 0
+
+    queue.enqueue(@root)
+    node_count += 1
+
+    while node_count >= 1
+      height += 1
+
+      until queue.empty?
+        p 'dequeue'
+        current = queue.dequeue
+        node_count -= 1
+      end
+
+      new_node_count = 0
+
+      if current.left
+        queue.enqueue(current.left)
+        new_node_count += 1
+      end
+
+      if current.right
+        queue.enqueue(current.right)
+        new_node_count += 1
+      end
+
+      # p new_node_count
+
+      node_count = new_node_count
+    end
+
+    return height
   end
 
   # root left right
@@ -119,8 +156,6 @@ class BinaryTree
     end
   end
 
-
-
   def print_level_order # bredth first traversal
   end
 
@@ -140,6 +175,9 @@ tree.insert(-4)
 tree.insert(4)
 tree.insert(8)
 tree.insert(19)
+tree.insert(9)
+tree.insert(-6)
+
 # see if that worked :)
 # p tree # should get a BinaryTree Obj that contains Node Objects
 
@@ -158,11 +196,14 @@ tree.insert(19)
 # p tree.print_post_order
 # p "tree in pre order:"
 # p tree.print_pre_order
-p "tree in order: "
-p tree.print_in_order
-
+# p "tree in order: "
+# p tree.print_in_order
+#
 p "tree in post order"
 p tree.print_post_order
+
+p 'tree height is: '
+p tree.height
 
 #### Testing Search Iterative
 # p tree.search(8) # true
