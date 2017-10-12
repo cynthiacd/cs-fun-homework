@@ -80,13 +80,13 @@ require_relative 'Restricted-Array/restricted_array'
 # do I need to add extra checks
 class Queue
   attr_reader :front_index, :last_index, :size
-  SPECIAL_VALUE = 99999
+  # SPECIAL_VALUE = 99999
 
   def initialize(size=0)
     @line = RestrictedArray.new(size)
     @front_index = 0
     @last_index = 0
-    @size = size + 1
+    @size = size
   end
 
   def enqueue(value)
@@ -99,10 +99,16 @@ class Queue
     @last_index == @size - 1 ? @last_index = 0 : @last_index += 1
   end
 
+  # do you need to change last_index as well? yes but only on the last dequeue which means queue is empty
   def dequeue
     first =  @line[@front_index]
-    @line[@front_index] = SPECIAL_VALUE
-    @front_index + 1 < @size - 1 ? @front_index += 1 : @front_index = 0
+    # @line[@front_index] = SPECIAL_VALUE
+    if @front_index + 1 < @size
+      @front_index += 1
+    else
+      @front_index = 0
+    end
+
     return first
   end
 
@@ -137,18 +143,18 @@ p queue
 
 5.times { queue.dequeue }
 p queue
-
+#
 queue.enqueue(5)
 queue.enqueue(6)
 queue.enqueue(7)
 p queue
-
+#
 queue.dequeue
 queue.dequeue
 p queue
-
-queue.enqueue(9)
-queue.enqueue(10)
-queue.enqueue(11)
-queue.enqueue(12)
-p queue
+#
+# queue.enqueue(9)
+# queue.enqueue(10)
+# queue.enqueue(11)
+# queue.enqueue(12)
+# p queue

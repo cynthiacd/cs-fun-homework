@@ -62,40 +62,32 @@ class BinaryTree
     return false
   end
 
+  # Time complexity: O(n) since you visit each node
   def height
-    return if !@root
+    return 0 if !@root
 
     queue = Queue.new
-    height = 0
-    node_count = 0
-
     queue.enqueue(@root)
-    node_count += 1
+    height = 0
 
-    while node_count >= 1
-      height += 1
+    until queue.empty?
+      size = queue.size
 
-      until queue.empty?
-        p 'dequeue'
+      until size == 0
         current = queue.dequeue
-        node_count -= 1
+
+        if current.left
+          queue.enqueue(current.left)
+        end
+
+        if current.right
+          queue.enqueue(current.right)
+        end
+
+        size -= 1
       end
 
-      new_node_count = 0
-
-      if current.left
-        queue.enqueue(current.left)
-        new_node_count += 1
-      end
-
-      if current.right
-        queue.enqueue(current.right)
-        new_node_count += 1
-      end
-
-      # p new_node_count
-
-      node_count = new_node_count
+      height += 1
     end
 
     return height
@@ -158,8 +150,6 @@ class BinaryTree
 
   def print_level_order # bredth first traversal
   end
-
-
 end
 
 
@@ -171,12 +161,14 @@ tree = BinaryTree.new
 tree.insert(5)
 tree.insert(2)
 tree.insert(11)
-tree.insert(-4)
-tree.insert(4)
-tree.insert(8)
-tree.insert(19)
-tree.insert(9)
-tree.insert(-6)
+# tree.insert(-4)
+# tree.insert(4)
+# tree.insert(8)
+# tree.insert(19)
+# tree.insert(9) # this should start 4th level in tree
+# tree.insert(-6)
+# tree.insert(12)
+# tree.insert(21)
 
 # see if that worked :)
 # p tree # should get a BinaryTree Obj that contains Node Objects
@@ -199,8 +191,8 @@ tree.insert(-6)
 # p "tree in order: "
 # p tree.print_in_order
 #
-p "tree in post order"
-p tree.print_post_order
+# p "tree in post order"
+# p tree.print_post_order
 
 p 'tree height is: '
 p tree.height

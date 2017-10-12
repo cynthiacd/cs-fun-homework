@@ -58,8 +58,7 @@ class BinaryTree
       return height_left + 1
     end
   end
-
-  # another way to declare private methods
+  # another way to declare private methods put this below the private method
   private :height
 
   ## does this still keep the root private? yes but not as clear
